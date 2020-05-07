@@ -1,5 +1,5 @@
 
-# Importação de bibliotecas de programas
+# ImportaÃ§Ã£o de bibliotecas de programas
 import numpy as np
 import pandas as pd
 import sklearn
@@ -13,16 +13,16 @@ cotacoesOHLC = cotacoes.copy()
 cotacoesOHLC = cotacoesOHLC.dropna()
 cotacoesOHLC = cotacoesOHLC[['Abert', 'Max', 'Min', 'Fech']]
 
-# Função de padronização de escala do conjunto de dados
+# FunÃ§Ã£o de padronizaÃ§Ã£o de escala do conjunto de dados
 def normescala(df):
   escalaminmax = sklearn.preprocessing.MinMaxScaler()
   df['Abert'] = escalaminmax.fit_transform(df.Open.values.reshape(-1,1))
   df['Max'] = escalaminmax.fit_transform(df.High.values.reshape(-1,1))
   df['Min'] = escalaminmax.fit_transform(df.Low.values.reshape(-1,1))
-  df['Fech'] = escalaminmax.fit_transform(df[‘Fech’].values.reshape(-1,1))
+  df['Fech'] = escalaminmax.fit_transform(df[â€˜Fechâ€™].values.reshape(-1,1))
   return df
 
-# Normalização do dataframe
+# NormalizaÃ§Ã£o do dataframe
 cotacoesOHLC_norm = cotacoesOHLC.copy()
 cotacoesOHLC_norm = normescala(cotacoesOHLC_norm)
 valid_pct = 10 
@@ -115,7 +115,7 @@ plt.legend()
 plt.show()
 comp = pd.DataFrame({'Col':testpredicao_y[:,3] - y_test[:,3]})
 plt.figure(figsize=(10,5))
-plt.plot(comp['Col'], color='blue', label='Diferença')
+plt.plot(comp['Col'], color='blue', label='DiferenÃ§a')
 plt.legend()
 plt.show()
 
